@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
 fun DonateFoodScreen(navController: NavHostController) {
@@ -17,6 +18,8 @@ fun DonateFoodScreen(navController: NavHostController) {
     var quantity by remember { mutableStateOf("") }
     var location by remember { mutableStateOf("") }
     var contactInfo by remember { mutableStateOf("") }
+
+    val firestore = FirebaseFirestore.getInstance()
 
     Column(
         modifier = Modifier
@@ -38,8 +41,22 @@ fun DonateFoodScreen(navController: NavHostController) {
 
         Button(onClick = {
             if (foodName.isNotEmpty() && quantity.isNotEmpty() && location.isNotEmpty() && contactInfo.isNotEmpty()) {
-                Toast.makeText(navController.context, "Donation Submitted!", Toast.LENGTH_SHORT).show()
-                navController.navigateUp()
+                val donation = hashMapOf(
+                    "foodName" to foodName,
+                    "quantity" to quantity,
+                    "location" to location,
+                    "contactInfo" to contactInfo
+                )
+
+                firestore.collection("donations")
+                    .add(donation)
+                    .addOnSuccessListener {
+                        Toast.makeText(navController.context, "Donation Submitted!", Toast.LENGTH_SHORT).show()
+                        navController.navigateUp()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(navController.context, "Submission Failed", Toast.LENGTH_SHORT).show()
+                    }
             } else {
                 Toast.makeText(navController.context, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
