@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "98156627669",
+    "project_id": "rescuebite-bb16d",
+    "storage_bucket": "rescuebite-bb16d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98156627669:android:1bfc59556b95ebfcd8c45c",
+        "android_client_info": {
+          "package_name": "com.lakshay.rescuebite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3f2bXMh-ESjfTcD0gGOi3jMa2IFLNLuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
